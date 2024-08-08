@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+   
+    /* overflow-x: hidden;
+    overflow-y: auto; */
+  }
+  body{
+    background-color: red;
+  }
+  /*---------------sec-00 css starts here--------------*/
+.sec-00 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex: 1 1 33.33%;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 100vh;
+    background-color: red;
+  }
+  
+  .sec-00heading {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0 100%;
+  }
+  
+  .sec-00heading h1 {
+    font-size: 3rem;
+    margin-top: 30px;
+  }
+  
+  .outlet {
+    position: relative;
+    border: 2px solid #000;
+    height: 400px;
+    margin-top: 40px;
+    width: 400px;
+    text-align: center;
+    background-image: url(images/gimg11.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    border-radius: 30px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .outlet:hover {
+    transform: scale(1.1);
+  
+  }
+  
+  .outlet:hover .outlettext {
+    display: block;
+  }
+  .outlettext h2{
+    color: #fff;
+  }
+  .outlet .outlettext {
+    position: absolute;
+    text-align: center;
+    display: none;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    padding: 40px;
+    z-index: 1;
+  }
+  
+  .outlettext .btn7 {
+    /* position: absolute; */
+    width: 150px;
+    height: 40px;
+    /* padding: 10px; */
+    margin-top: 80px;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bolder;
+  
+  }
+  
+  .outlettext .btn7 a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .outlettext .btn7:hover {
+    background-color: red;
+    color: white;
+    font-weight: bolder;
+    border: 2px solid white;
+    ;
+  }
+  
+  .btn7:hover {
+    color: #fff;
+    transition: 0.3s ease-in-out
+  }
+  
+  /* .btn7 a:hover{
+    color: white;
+  } */
+  .outlet::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+    z-index: 0;
+  
+  }
+  
+  .outlet:hover::after {
+    transform: translateY(0);
+  
+  }
+  
+  .outlet:hover .outlettext {
+    bottom: 50%;
+    transform: translateY(50%);
+    transition: bottom 0.5s ease, transform 0.5s ease;
+  }
+  @media only screen and (min-width:200px) and (max-width:1336px){
+    .sec-00{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      padding: 20px;
+    }
+    .outlet{
+      display: flex;
+      height: 250px;
+      width: 300px;
+    }
+    #lastbox{
+        padding-bottom: 60px;
+    }
+  }
+  
+  
+  /*---------------sec-00 css ends here--------------*/

@@ -1,0 +1,1535 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    width: 100%;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    position: relative;
+  }
+  
+  
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+  
+  /*=============== VARIABLES CSS ===============*/
+  :root {
+    --header-height: 3.45rem;
+  
+    /*========== Colors ==========*/
+    --black-color: hsl(220, 24%, 12%);
+    --black-color-light: hsl(220, 24%, 15%);
+    --black-color-lighten: hsl(220, 20%, 18%);
+    --white-color: #fff;
+  
+    /*========== Font and typography ==========*/
+    --body-font: "Montserrat", sans-serif;
+    --normal-font-size: .938rem;
+  
+    /*========== Font weight ==========*/
+    --font-regular: 400;
+    --font-semi-bold: 600;
+  
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+  }
+  
+  /*========== Responsive typography ==========*/
+  @media screen and (min-width: 1024px) {
+    :root {
+      --normal-font-size: 1rem;
+    }
+  }
+  
+  /* Increase the width of the "Services" dropdown menu */
+  .dropdown__menu {
+    width: 200px;
+    /* Adjust this value as needed */
+  }
+  
+  /* Additional styling for better alignment and visibility */
+  .services-dropdown .dropdown__link,
+  .services-dropdown .dropdown__sublink {
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .services-dropdown .dropdown__link:hover,
+  .services-dropdown .dropdown__sublink:hover {
+    background-color: var(--black-color-lighten);
+  }
+  
+  /*=============== BASE ===============*/
+  
+  ul {
+    list-style: none;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  /*=============== REUSABLE CSS CLASSES ===============*/
+  .container {
+    max-width: 100%;
+    margin-inline: 1.5rem;
+  }
+  
+  /*=============== HEADER ===============*/
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    text-align: center;
+    
+    width: 100%;
+    /* background-color: red; */
+    background-color: #e3010f;
+    /* background-color: transparent; */
+    z-index: var(--z-fixed);
+  }
+  
+  /*=============== NAV ===============*/
+  .nav {
+    height: var(--header-height);
+  }
+  
+  .nav__logo,
+  .nav__burger,
+  .nav__close {
+    color: var(--white-color);
+  }
+  
+  .nav__data {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav__logo {
+    display: inline-flex;
+    align-items: center;
+    column-gap: .25rem;
+    font-weight: var(--font-semi-bold);
+  }
+  
+  .nav__logo img {
+    font-weight: initial;
+    font-size: 1.25rem;
+    width: 200px;
+     padding:20px;
+     height: auto;
+  }
+  
+  .nav__toggle {
+    position: relative;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .nav__burger,
+  .nav__close {
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    inset: 0;
+    margin: auto;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: opacity .1s, transform .4s;
+  }
+  
+  .nav__close {
+    opacity: 0;
+  }
+  
+  /* Navigation for mobile devices */
+  @media screen and (max-width: 1118px) {
+    .nav__menu {
+      position: absolute;
+      left: 0;
+      top: 2.5rem;
+      width: 100%;
+      height: calc(100vh - 3.5rem);
+      overflow: auto;
+      pointer-events: none;
+      opacity: 0;
+      transition: top .4s, opacity .3s;
+    }
+    .nav__menu .nav__list .nav__link.nav__culture {
+      margin-bottom: 1.5rem; /* Adjust this value as needed */
+    }
+  
+    .nav__menu::-webkit-scrollbar {
+      width: 0;
+    }
+  
+    .nav__list {
+      background-color: var(--black-color);
+      padding-top: 1rem;
+    }
+    
+  }
+  
+  .nav__link {
+    color: var(--white-color);
+    background-color: transparent;
+    font-weight: var(--font-semi-bold);
+    padding: 1.25rem 1.5rem;
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color .3s, color 0.3s ease 0.1s;
+  }
+  
+  .nav__link:hover {
+    color: gray;
+    background-color: var(--black-color-light);
+  }
+  
+  /* Show menu */
+  .show-menu {
+    opacity: 1;
+    top: 3.5rem;
+    pointer-events: initial;
+  }
+  
+  /* Show icon */
+  .show-icon .nav__burger {
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+  
+  .show-icon .nav__close {
+    opacity: 1;
+    transform: rotate(90deg);
+  }
+  
+  /*=============== DROPDOWN ===============*/
+  .dropdown__item {
+    cursor: pointer;
+  }
+  
+  .dropdown__arrow {
+    font-size: 1.25rem;
+    font-weight: initial;
+    transition: transform .4s;
+  }
+  
+  .dropdown__link,
+  .dropdown__sublink {
+    padding: 1.25rem 1.25rem 1.25rem 2.5rem;
+    color: var(--white-color);
+    background-color: #e3010f;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    column-gap: .5rem;
+    font-weight: var(--font-semi-bold);
+    transition: background-color .3s;
+  }
+  
+  .dropdown__link i,
+  .dropdown__sublink i {
+    font-size: 1.25rem;
+    font-weight: initial;
+  }
+  
+  .dropdown__link:hover,
+  .dropdown__sublink:hover {
+    background-color: var(--black-color);
+    color: var(--white-color);
+  }
+  
+  .dropdown__menu,
+  .dropdown__submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s ease-out;
+  }
+  
+  /* Show dropdown menu & submenu */
+  /* .dropdown__item:hover .dropdown__menu,
+  .dropdown__subitem:hover > .dropdown__submenu {
+    max-height: 1000px;
+    transition: max-height .4s ease-in;
+    overflow: visible;
+  } */
+  
+  /* Rotate dropdown icon */
+  .dropdown__item:hover .dropdown__arrow {
+    transform: rotate(180deg);
+  }
+  
+  /*=============== DROPDOWN SUBMENU ===============*/
+  .dropdown__add {
+    margin-left: auto;
+  }
+  
+  .dropdown__sublink {
+    background-color: transparent;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    display: block;
+    color: var(--white-color);
+  }
+  
+  .dropdown__sublink:hover {
+    background-color: var(--black-color);
+    color: var(--white-color);
+  }
+  
+  .dropdown__submenu::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .dropdown__submenu::-webkit-scrollbar-thumb {
+    background-color: var(--black-color);
+    border-radius: 4px;
+  }
+  .dropdown__menu.show-dropdown {
+    max-height: 1000px; /* Adjust as needed */
+    overflow: visible;
+    transition: max-height 0.4s ease-in;
+  }
+  
+  /*=============== BREAKPOINTS ===============*/
+  /* For small devices */
+  @media screen and (max-width: 340px) {
+    .header {
+      width: 100%;
+      height: auto;
+      overflow-x: hidden;
+    }
+    .container {
+      margin-inline: 1rem;
+    }
+  
+    .nav__link {
+      padding-inline: 1rem;
+    }
+    .nav__logo img{
+      width: fit-content;
+      height: auto;
+    }
+  }
+  
+  /* For large devices */
+  @media screen and (min-width: 1118px) {
+    .container {
+      margin-inline: auto;
+    }
+  
+    .nav {
+      height: calc(var(--header-height) + 2rem);
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  
+    .nav__toggle {
+      display: none;
+    }
+  
+    .nav__list {
+      height: 100%;
+      display: flex;
+      column-gap: 3rem;
+    }
+  
+    .nav__link {
+      height: 100%;
+      padding: 0;
+      justify-content: initial;
+      column-gap: 0.25rem;
+      
+    }
+  
+    .nav__link:hover {
+      background-color: transparent;
+    }
+  
+    .dropdown__item,
+    .dropdown__subitem {
+      position: relative;
+    }
+  
+    .dropdown__menu,
+    .dropdown__submenu {
+      max-height: initial;
+      overflow: initial;
+      position: absolute;
+      left: 0;
+      top: 6rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s, top .3s;
+    }
+  
+    .dropdown__link,
+    .dropdown__sublink {
+      padding-inline: 1rem 3.5rem;
+      color: var(--white-color);
+    }
+  
+    .dropdown__submenu {
+      position: absolute;
+      left: 100%;
+      top: .5rem;
+    }
+  
+    /* Show dropdown menu */
+    .dropdown__item:hover .dropdown__menu {
+      opacity: 1;
+      top: 5.5rem;
+      pointer-events: initial;
+      transition: top .3s;
+    }
+  
+    /* Show dropdown submenu */
+    .dropdown__subitem:hover > .dropdown__submenu {
+      opacity: 1;
+      top: 0;
+      pointer-events: initial;
+      transition: top .3s;
+    }
+   
+  }
+  /*-------------------------responsive navbar design new starts here------------------*/
+  
+  /*-------------------------responsive navbar design new ends here ------------------*/
+.o1sec-01{
+    background: url(images/phoolbagan-outlet-bcg.jpeg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    
+}
+.o1sec-01 .outletheading {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
+    min-height:100vh;
+    justify-content: center;
+    align-items: center;
+    
+}
+.outletheading h1{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    font-size: 3rem;
+    font-weight: bolder;
+    z-index: 1000;
+}
+.outletheading p{
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    z-index: 1000;
+}
+/*----------------social media css starts here------------------*/
+.sm {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 25px;
+    overflow-x: hidden;
+}
+
+.sm h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.sm1{
+    border: 2px solid lightgray;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s;
+    margin-bottom: 30px;
+    gap: 20px;
+    
+    
+}
+.sm1:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.sm1img img{
+    width: 298px;
+    height: 300px;
+    border-radius: 10px;
+}
+.sm01{
+    display: flex;
+    gap: 30px;
+    justify-content: space-around;
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+}
+.sm1content{
+    line-height: 1.8;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.sm1content button{
+    bottom: 0;
+    width: 200px;
+    height: 35px;
+    margin-top: auto;
+}
+.btn3{
+    border-radius: 20px;
+    background-color: #fff;
+    font-weight: bold;
+}
+.btn3:hover{
+    background-color: #e3010f;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.btn3 a{
+    color: #000;
+}
+.sm1content .btn3:hover a{
+    color: #fff;
+    
+    
+}
+@media only screen and (min-width:200px) and (max-width:1336px){
+    .sm {
+        display: flex;
+        flex-direction: column;
+
+    }
+    .sm1{
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+    }
+    .o1sec-01{
+        overflow-x: hidden;
+    }
+}
+/*----------------social media css ends here------------------*/
+/*-------------------------------gallery slider css starts here---------------*/
+
+.o1sec-02{
+    
+    width: 100%;
+    height: auto;
+
+}
+.galleryheading{
+    display: flex;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    
+}
+.galleryheading h1{
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-size: 3rem;
+    font-weight: bolder;
+    margin: 30px auto;
+    margin-top: 40px;
+}
+.galleryheading h1::before{
+  content: '';
+  position: absolute;
+  bottom: -14.5px;
+  left: 50%;
+  width: 240px;
+  height: 3px;
+  background-color: red;
+  transform: translateX(-50%);
+
+}
+.galleryheading h1::after{
+content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  width: 45px;
+  height: 6px;
+  background-color: red;
+  transform: translateX(-50%);
+
+}
+.galleryheading button{
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bolder;
+    color: black;
+    border: 2px solid #000;
+    margin-bottom: 50px;
+    padding: 10px 0px;
+}
+.galleryheading button:hover{
+    background-color: red;
+    color: #fff;
+    transition:  all 0.3s;
+    cursor: pointer;
+    border: 2px solid white;
+    
+}
+.img_box  img{
+    max-width:100%;
+}
+.slider_container .slider_container{
+    padding: 0 15px;
+    max-width: 1230px;
+    margin: 0 auto;
+}
+.card_slider{
+
+}
+/*-------------------------------gallery slider css ends here-----------------*/
+/*-------------------------------testimonial slider css starts here-----------------*/
+.wrapperheading{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    background: linear-gradient(90deg,#880fc4 0%,#1d39f2 100%);
+}
+.wrapper{
+    background: linear-gradient(90deg,#880fc4 0%,#1d39f2 100%);
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    
+}
+.wrapperheading h1{
+    font-size: 60px;
+    color: white;
+    font-weight: 500;
+    margin-top: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.wrapperheading h5{
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 80px;
+}
+.packs{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    margin: 0 auto;
+    height: auto;
+}
+.packs:hover{
+    cursor: pointer;
+}
+.pack{
+    width: 280px;
+    height: auto;
+    border-radius: 15px;
+    margin: 7px;
+    padding: 20px 30px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 10px 20px 25px rgba(0, 0, 0, 0.2);
+    transition:0.5s;
+}
+.pack img{
+    height: 90px;
+    width: 90px;
+    border: 2px solid #f2f2f2;
+    border-radius: 50%;
+    position: absolute;
+    top: -40px;
+    left: 20px;
+    background-image: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+   
+}
+.pack p{
+    font-size: 16px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+.pack h2{
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.card h4{
+    color: #333;
+    font-weight: 400;
+    font-size: 16px;
+}
+.pack i{
+    font-size: 60px;
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+    color: #b2bec3;
+}
+.pack:hover{
+    transform: scale(1.1);
+    color: #333;
+    background: #fff;
+    z-index: 10000;
+}
+.pack:hover h2{
+    color: #000;
+}
+/*---responsive design--------*/
+@media (max-width: 1336px){
+    .wrapper{
+        width: 100%;
+        flex-direction: column;
+    }
+    .packs{
+        width: 100%;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .pack{
+        margin: 40px 0;
+    }
+    .btn8{
+        margin-top: 50px;
+    }
+}
+/*-------------------------------testimonial slider css ends here-----------------*/
+/*------------------------short menu css starts here---------------------------------*/
+.shortmenu{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    margin-top: 30px;
+    box-sizing: border-box;
+}
+.menuh{
+    /* display: block; */
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 40px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+}
+.menuh h1 {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 20px; 
+}
+.menuh h1{
+    margin-bottom: 20px;
+}
+.menuh h1:before{
+    content: '';
+    position: absolute;
+    width: 240px;
+    height: 3px;
+    background-color: red;
+    left: 50%;
+    bottom: -13px;
+    transform: translateX(-50%);
+
+}
+.menuh h1:after{
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 6px;
+    background-color: red;
+    left: 50%;
+    bottom: -14.5px;
+    transform: translateX(-50%);
+}
+.smenu-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    height: auto;
+    margin-bottom: 130px;
+    /* width: 1170px; */
+
+}
+.smenu-item a{
+    text-decoration: none;
+    color: #000;
+}
+.smenu-item a:nth-child(1) .menu1 {
+    background-image: url(images/indian.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.smenu-item a:nth-child(2) .menu1{
+    background-image: url(images/chinese.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;   
+   
+}
+.smenu-item a:nth-child(3) .menu1{
+    background-image: url(images/pastaandpizza.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;   
+    
+
+}
+.smenu-item a:nth-child(4) .menu1{
+    background-image: url(images/southindian.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;   
+    
+
+}
+.smenu-item a:nth-child(5) .menu1{
+    background-image: url(images/wrapsandrolls.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;   
+    
+
+}
+.smenu-item a:nth-child(6) .menu1{
+    background-image: url(images/wrapsandrolls.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;   
+    
+
+}
+
+.menu1{
+    position: relative;
+    justify-content:center;
+    border: 2px solid black;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    margin-top: 50px;
+    gap: 20px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.menu1 h3{
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 100;
+    opacity: 1.8;
+    color: red;
+}
+.menu1 p{
+    text-align: center;
+    justify-content: center;
+    line-height: 1.6;
+    margin-top: 50px;
+    font-weight: bolder;
+    font-size: 1rem;
+    z-index: 100;
+    opacity: 1.8;
+    color: #fff;
+}
+/* .smenu-item a:nth-child(1) .menu1:hover, 
+.smenu-item a:nth-child(2) .menu1:hover, 
+.smenu-item a:nth-child(3) .menu1:hover */
+.menu1:hover{ 
+    transform: scale(1.2); /* Scale up slightly on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+.menub{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 50px;
+    
+}
+.btn8 {
+    border: 2px solid #000;
+    height: 55px;
+    width: 300px;
+    margin: 10px;
+    background-color: #fff;
+    color: #000;
+    font-size: 1rem;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.btn8 a{
+    text-decoration: none;
+    color: #fff;
+}
+.btn8 a:hover{
+    color: #000;
+    background-color: red;
+}
+.btn8:hover{
+    background-color: red;
+    color: #000;
+    transition: all 0.3s ease;     
+}
+
+/*------------------------short menu css ends here---------------------------------*/
+/*---------------sec-07  css starts here--------------*/
+
+.testimonial-section {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background:url(images/p01.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 60vh;
+  
+  }
+  
+  .testimonial-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    margin-top: 70px;
+    justify-content: center;
+  }
+  
+  .testimonial-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%; /* Ensures uniform size */
+    max-width: 500px;
+    min-height: 300px; /* Ensures uniform height */
+  }
+  
+  .stars {
+    font-size: 1.5em; /* Increased font size */
+    color: #f5b942;
+  }
+  
+  .testimonial-content p {
+    font-size: 1rem; /* Increased font size */
+    margin: 20px 0;
+    color: #8f8e8e;
+    line-height: 1.6;
+  }
+  
+  .testimonial-author {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .testimonial-author img {
+    width: 60px; /* Increased image size */
+    height: 60px; /* Increased image size */
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .testimonial-author h3 {
+    margin: 10px 0 0;
+    font-size: 1.2em; /* Increased font size */
+    color: #333;
+  }
+  
+  .navigation-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .navigation-dots .dot {
+    height: 12px; /* Increased dot size */
+    width: 12px; /* Increased dot size */
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .navigation-dots .dot.active {
+    background-color: #717171;
+  }
+  /*---------------sec-07  css ends here--------------*/
+  /*---------------section 5 css starts here-----------*/
+  .collage{
+    text-align: center;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+  }
+  .collage h1{
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  .photo-collage {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .photo {
+    flex: 1 1 calc(33.33% - 20px); /* 3 columns with 10px gap */
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .photo img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .photo img:hover {
+    transform: scale(1.1);
+  }
+  
+  @media (max-width: 900px) {
+    .photo {
+        flex: 1 1 calc(50% - 20px); /* 2 columns with 10px gap */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .photo {
+        flex: 1 1 100%; /* 1 column */
+    }
+  }
+  /*---------------section 5 css ends here-----------*/
+/*---------------footer class css starts here------------*/
+.footer1 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 60vh;
+    /* background-color: rgb(27, 27, 27); */
+    background-color: #e3010f;
+    padding: 20px;
+    box-sizing: border-box;
+    
+    overflow-y: auto;
+    
+  }
+  
+  .rows {
+    display: flex;
+    flex-direction: row;
+    max-width: 1170px;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 20px;
+    box-sizing: border-box;
+  
+  }
+  
+  .rows:nth-child(1),
+  .rows:nth-child(2),
+  .rows:nth-child(3) {
+    gap: 70px;
+  }
+  
+  .rows:nth-child(4) {
+    margin-left: 20px;
+  }
+  
+  .row1 {
+    display: flex;
+    color: white;
+    width: 100%;
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    justify-content: center;
+    margin: auto;
+    margin-top: 100px;
+    flex: 1 1 25%;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-top: 40px;
+  }
+  
+  .row1 h2 {
+    font-size: 1.8rem;
+  }
+  
+  .row1 .col1 p {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    line-height: 2;
+    text-align: left;
+    justify-content: left;
+    align-items: left;
+  }
+  
+  .row1 .col2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  
+  }
+  
+  .row1 .col2 ul li {
+    list-style: none;
+    padding: 10px 0px;
+  }
+  
+  .row1 .col2 ul li a {
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  .row1 .col2 ul li a:hover {
+    color: gray;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  
+  .row1 .col3 {
+    font-size: 1rem;
+  
+  }
+  
+  .col3 span {
+    display: block;
+    /* Ensures each span is on a new line */
+    margin-bottom: 10px;
+    /* Adjust the bottom margin as needed */
+  }
+  
+  .col3 p {
+    margin-left: 40px;
+    /* Keep your existing left margin for paragraphs */
+  }
+  
+  .col3 i {
+    width: 30px;
+    height: 30px;
+  }
+  
+  /*------------------new dropdown style here----------------*/
+  /* Adjust font size and alignment for footer links */
+  .footer1 .nav__link {
+    font-size: 10px;
+    /* Adjust font size as needed */
+    padding: 10px 15px;
+    /* Adjust padding for links */
+    display: block;
+    /* Ensure links take full width */
+    text-decoration: none;
+    color: #333;
+    /* Adjust link color */
+  }
+  
+  /* Style the dropdown arrow for outlets */
+  .footer1 .dropdown__arrow {
+    margin-left: 0px;
+  }
+  
+  /* Style the dropdown submenus */
+  .footer1 .dropdown__menu {
+    position: absolute;
+    top: 40px !important;
+    left: 0;
+    display: none;
+    /* Hide dropdown menu by default */
+    background-color: #fff;
+    text-align: center;
+    justify-content: center;
+    color: black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    font-size: 12px;
+    margin-bottom: 20px;
+    /* Adjust submenu font size */
+  }
+  
+  .footer1 .dropdown__submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: none;
+    /* Hide submenu by default */
+    background-color: transparent;
+    color: black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    font-size: 12px;
+    /* Adjust submenu font size */
+  }
+  
+  
+  /* Ensure submenus appear properly */
+  .footer1 .dropdown__item:hover .dropdown__menu {
+    display: block;
+    /* Show dropdown menu on hover */
+  }
+  
+  .footer1 .dropdown__subitem:hover .dropdown__submenu {
+    display: block;
+    /* Show submenu on hover */
+  }
+  
+  .footer1 .nav__menu {
+    position: relative;
+    /* Ensure parent has relative positioning */
+    z-index: 1;
+    
+    /* Set higher z-index for the nav menu */
+  }
+  
+  .footer1 .dropdown__menu,
+  .footer1 .dropdown__submenu {
+    z-index: 2;
+    /* Set even higher z-index for dropdowns to appear above other content */
+  }
+  
+  /*------------------new dropdown style ends here----------------*/
+  
+  #s2 {
+    margin-top: 20px;
+    /* Add top margin specifically to the #s2 span */
+  }
+  
+  #dp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+  
+  }
+  
+  #dp:hover {
+    color: gray;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  
+  #dp i {
+    margin-right: 10px;
+  }
+  
+  .row1 .social {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 50px;
+  }
+  
+  .row1 .social i:hover {
+    color: gray;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  
+  footer hr {
+    margin-bottom: 40px;
+  }
+  
+  .copyright {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: bold;
+  }
+  .copyright a{
+    color: #fff;
+  }
+  
+  .copy,
+  .copy2 {
+    margin: 10px 0;
+  }
+  
+  .copy2 a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .copy2:hover,
+  .copy:hover {
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+  }
+  .social a{
+    color: #fff;
+  }
+  /* Media Queries for Responsive Design */
+  @media only screen and (max-width: 768px) {
+    .rows {
+      width: 100%;
+      flex-direction: column;
+      margin: 0;
+      /* Stack rows vertically */
+    }
+  
+    .row1 {
+      margin-top: 40px;
+      /* Increase top margin for better spacing */
+    }
+  
+    .row1 .col2 ul li {
+      flex: 0 0 100%;
+      /* Full width on smaller screens */
+    }
+    .copyright {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .copy,
+    .copy2 {
+      margin: 5px 0;
+    }
+  
+    .copy2 a {
+      margin: 5px 0;
+    }
+  }
+  
+  
+  
+  @media only screen and (max-width: 480px) {
+    .row1 .social {
+      margin-top: 10px;
+      /* Reduce margin for social icons */
+    }
+  
+    .social {
+      flex-direction: column;
+    }
+    .copy,
+    .copy2 {
+      font-size: 0.8rem;
+      margin: 3px 0;
+    }
+  
+    .copy2 a {
+      font-size: 0.8rem;
+    }
+  }
+  
+  /* Adjustments for Mobile Devices */
+  @media only screen and (max-width: 1336px) {
+    .footer1 .col2 ul {
+      padding-left: 0;
+      /* Remove left padding from ul */
+      margin-bottom: 20px;
+      /* Add margin bottom for better spacing */
+    }
+  
+    .footer1 .dropdown__item {
+      position: relative;
+      /* Ensure dropdown items are relative for absolute positioning */
+    }
+  
+    .footer1 .dropdown__menu {
+      display: none;
+      /* Hide dropdown menu by default */
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      /* Background color for dropdown */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      /* Box shadow for dropdown */
+      z-index: 1;
+      /* Ensure dropdown appears above other elements */
+      width: 100%;
+      /* Full width of the parent */
+    }
+  
+    .footer1 .dropdown__item:hover .dropdown__menu {
+      display: block;
+      /* Show dropdown menu on hover */
+    }
+  
+    .footer1 .dropdown__link {
+      padding: 10px 20px;
+      /* Adjust padding for main dropdown items */
+      cursor: pointer;
+      color: #fff;
+      /* Text color for main dropdown items */
+      text-decoration: none;
+      display: block;
+      /* Ensure block display for full width */
+    }
+  
+    .footer1 .dropdown__subitem {
+      padding: 10px 20px;
+      /* Adjust padding for subitems */
+    }
+  
+    .footer1 .dropdown__submenu {
+      display: none;
+      /* Hide submenu by default */
+    }
+  
+    .footer1 .dropdown__subitem:hover .dropdown__submenu {
+      display: block;
+      /* Show submenu on hover */
+    }
+  
+    .footer1 .dropdown__sublink {
+      padding: 8px 20px;
+      /* Adjust padding for submenu links */
+      color: #333;
+      /* Text color for submenu links */
+      text-decoration: none;
+      display: block;
+      /* Ensure block display for full width */
+    }
+  }
+  /*----------------------footer extra css --------------------------*/
+  
+  
+  /* Responsive adjustments */
+  @media only screen and (max-width: 768px) {
+    .rows {
+      flex-direction: column;
+      margin: 0;
+    }
+  
+    .row1 {
+      margin-top: 40px;
+    }
+  
+    .row1 .col2 ul li {
+      flex: 0 0 100%;
+    }
+  
+    .copyright {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 80px;
+    }
+  
+    .copy,
+    .copy2 {
+      margin: 5px 0;
+    }
+  
+    .copy2 a {
+      margin: 5px 0;
+    }
+    .social a{
+      color: #fff;
+    } 
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .row1 .social {
+      flex-direction: row;
+      margin-top: 10px;
+    }
+   
+  
+    .row1 .col1 p,
+    .row1 .col2 ul li a,
+    .row1 .col3 p {
+      font-size: 0.7rem;
+      line-height: 1.8;
+    }
+  
+    .copy,
+    .copy2 {
+      font-size: 0.8rem;
+      margin: 3px 0;
+    }
+  
+    .copy2 a {
+      font-size: 0.8rem;
+    }
+  }
+  
+  /* Ensure body can scroll fully */
+  body::after {
+    content: "";
+    display: block;
+    height: auto; /* Adjust based on footer height */
+  }
+  /*----------------------footer extra css --------------------------*/
