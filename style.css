@@ -20,7 +20,9 @@
     flex-wrap: wrap;
     width: 100%;
     min-height: 100vh;
-    background-color: red;
+    /* background-color: red; */
+    background: linear-gradient(to bottom,#e3010f 50%, #fff 100% );
+    position: relative;
   }
   
   .sec-00heading {
